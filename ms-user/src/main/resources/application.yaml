@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/atl_omnio_project
+    username: postgres
+    password: 2000
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+    properties:
+      hibernate:
+        format-sql: true
+    open-in-view: false
+
+application-description: Omnio application
+application-version: 1.0
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+
+
