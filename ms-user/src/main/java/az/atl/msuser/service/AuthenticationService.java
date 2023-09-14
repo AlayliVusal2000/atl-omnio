@@ -26,9 +26,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final MessageSource messageSource;
 
+
     public RegisterResponse register(RegisterRequest request) {
-        var isExist = userRepository.findByUsername(request.getUsername()).isPresent();
-        if (isExist) {
+
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new UserAlreadyRegisteredException(messageSource);
 
         }
@@ -53,8 +54,7 @@ public class AuthenticationService {
                 request.getPassword()));
 
         UserEntity userEntity = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UserNotFoundException(messageSource));
-//                        "User name not found"));
+                .orElseThrow(() -> new UserNotFoundException("This username does not exist: " + request.getUsername()));
         String jwtToken = jwtService.generateToken(userEntity);
         return AuthenticationResponse
                 .builder()

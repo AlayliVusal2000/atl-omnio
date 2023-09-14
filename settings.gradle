@@ -1,1 +1,3 @@
 rootProject.name = 'omnio-app'
+
+include 'ms-user',"ms-message"

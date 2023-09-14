@@ -2,6 +2,7 @@ package az.atl.msuser.model;
 
 import az.atl.msuser.annotation.CheckEmailConstraint;
 import az.atl.msuser.annotation.ValidPassword;
+import az.atl.msuser.model.consts.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;

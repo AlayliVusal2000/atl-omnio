@@ -7,7 +7,6 @@ import az.atl.msuser.model.dto.UpdateDto;
 import java.util.List;
 
 public interface AdminService {
-    List<AdminDto> getAllUsers();
 
     AdminDto getUserById(Long id);
 
@@ -18,7 +17,10 @@ public interface AdminService {
     void updateAccount(AdminDto adminDto);
 
     void updatePassword(UpdateDto updateDto);
-    void updateRole(String username,RoleDto roleDto);
+
+    void updateRole(String username, RoleDto roleDto);
+
+    List<AdminDto> findPaginated(Integer pageNo, Integer pageSize);
 
 
 }

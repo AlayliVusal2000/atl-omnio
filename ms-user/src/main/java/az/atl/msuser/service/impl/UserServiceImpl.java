@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
     public void updateMyAccount(UserDto userDto) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserEntity userEntity = userRepository.findByUsername(auth.getName()).get();
+        INSTANCE.buildEntityToDto(userEntity);
 
         userEntity.setName(userDto.getName());
         userEntity.setSurname(userDto.getSurname());
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(encodedPassword);
         userRepository.save(userEntity);
         log.info("Your password has been updated.");
-
     }
+
+
 }

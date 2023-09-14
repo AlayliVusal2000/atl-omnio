@@ -1,19 +1,21 @@
 package az.atl.msuser.service;
 
 import az.atl.msuser.dao.entity.UserEntity;
-import az.atl.msuser.model.MessageResponse;
-import az.atl.msuser.model.SendMessageRequest;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import az.atl.msuser.model.MessageRequest;
+import az.atl.msuser.model.dto.MessageDto;
 
 import java.util.List;
 
-@Service
-
 public interface MessageService {
+    void sendMessage(MessageRequest request, UserEntity sender);
 
-    void sendMessage(SendMessageRequest request, UserEntity fromWhom);
-    List<MessageResponse> getMessages();
+    List<MessageDto> getSentAllMyMessages();
+
+    List<MessageDto> getBuyAllMyMessages();
+
+    List<MessageDto> getSenderAllMessagesById(Long userId);
+
+    List<MessageDto> getRecipientAllMessagesById(Long userId);
+
+
 }
-
-

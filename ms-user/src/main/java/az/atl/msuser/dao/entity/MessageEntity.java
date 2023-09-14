@@ -1,10 +1,10 @@
 package az.atl.msuser.dao.entity;
 
-
-import az.atl.msuser.dao.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDateTime;
 
 @Builder
 @ToString
@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
+@Entity()
 @Table(name = "message")
 public class MessageEntity {
 
@@ -21,14 +21,13 @@ public class MessageEntity {
     @Id
     Long id;
     @ManyToOne
-    @JoinColumn(name = "from_whom_id")
-    UserEntity fromWhom;
+    @JoinColumn(name = "sender_id")
+    UserEntity sender;
 
-    @ManyToOne
-    @JoinColumn(name = "to_whom_id")
-    UserEntity toWhom;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipient_id", nullable = false)
+    UserEntity recipient;
     String message;
-
+    LocalDateTime sentTime;
 
 }

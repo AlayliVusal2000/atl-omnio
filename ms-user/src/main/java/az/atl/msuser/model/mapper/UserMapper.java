@@ -17,4 +17,5 @@ public interface UserMapper {
 
     List<AdminDto> buildEntityToDtoList(List<UserEntity> userEntity);
 
+
 }

@@ -3,7 +3,6 @@ package az.atl.msuser.config;
 import az.atl.msuser.dao.repo.UserRepository;
 import az.atl.msuser.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,12 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserRepository userRepository;
-    MessageSource messageSource;
 
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException(messageSource));
+                .orElseThrow(() -> new UserNotFoundException("This username not found: " + username));
 
     }
 
@@ -33,7 +31,6 @@ public class ApplicationConfig {
         provider.setUserDetailsService(userDetailsService());
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
-
     }
 
     @Bean
@@ -46,5 +43,4 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

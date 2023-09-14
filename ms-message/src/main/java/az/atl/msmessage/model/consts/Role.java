@@ -1,5 +1,6 @@
-package az.atl.msuser.model;
+package az.atl.msmessage.model.consts;
 
 public enum Role {
     ADMIN, USER
 }
+

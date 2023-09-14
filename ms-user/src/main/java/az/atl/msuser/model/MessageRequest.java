@@ -1,15 +1,16 @@
 package az.atl.msuser.model;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MessageResponse {
-    String fromWhom;
+public class MessageRequest {
+    String recipient;
     String message;
 }
 

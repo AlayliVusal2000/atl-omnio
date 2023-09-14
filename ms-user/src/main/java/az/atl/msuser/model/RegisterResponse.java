@@ -1,6 +1,7 @@
 package az.atl.msuser.model;
 
 import az.atl.msuser.dao.entity.UserEntity;
+import az.atl.msuser.model.consts.Role;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;

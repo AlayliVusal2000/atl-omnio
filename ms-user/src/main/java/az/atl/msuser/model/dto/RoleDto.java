@@ -1,6 +1,6 @@
 package az.atl.msuser.model.dto;
 
-import az.atl.msuser.model.Role;
+import az.atl.msuser.model.consts.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

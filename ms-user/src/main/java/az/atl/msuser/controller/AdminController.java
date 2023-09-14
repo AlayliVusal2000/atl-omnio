@@ -4,9 +4,6 @@ import az.atl.msuser.model.dto.AdminDto;
 import az.atl.msuser.model.dto.RoleDto;
 import az.atl.msuser.model.dto.UpdateDto;
 import az.atl.msuser.service.AdminService;
-import az.atl.msuser.service.JwtService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +15,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
-
 public class AdminController {
     private final AdminService adminService;
 
-    @GetMapping("/getAll")
-    @Operation(summary = "My endpoint", security = @SecurityRequirement(name = "bearerAuth"))
-    public ResponseEntity<List<AdminDto>> getAllUsers() {
-        return ResponseEntity.ok(adminService.getAllUsers());
-    }
 
     @GetMapping("/getById/{id}")
     public ResponseEntity<AdminDto> getUserById(@PathVariable Long id) {
@@ -59,5 +50,10 @@ public class AdminController {
         adminService.updateRole(username, roleDto);
     }
 
+    @GetMapping("/getUsers/{pageNo}/{pageSize}")
+    public List<AdminDto> getPaginatedCountries(@PathVariable Integer pageNo,
+                                                @PathVariable Integer pageSize) {
 
+        return adminService.findPaginated(pageNo, pageSize);
+    }
 }
