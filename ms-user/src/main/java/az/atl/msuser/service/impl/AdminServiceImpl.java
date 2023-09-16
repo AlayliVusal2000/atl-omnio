@@ -46,8 +46,6 @@ public class AdminServiceImpl implements AdminService {
         Locale locale = LocaleContextHolder.getLocale();
         Object[] objs1 = new Object[1];
         objects[0] = id;
-        objs1[0] = id;
-//
         Optional<UserEntity> userEntity = Optional
                 .ofNullable(userRepository.findById(id)
                         .orElseThrow(() -> new UserNotFoundException(
@@ -63,8 +61,7 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUserById(Long id) {
         objects[0] = id;
         userRepository.findById(id).orElseThrow(
-                () -> new UserNotFoundException(messageSource.getMessage(
-                        USER_NOT_FOUND.getMessage(), objects, locale)));
+                () -> new UserNotFoundException("messageSource.getMessage USER_NOT_FOUND.getMessage(), objects, locale"));
         userRepository.deleteById(id);
         log.info("The user has been deleted id: " + id);
     }
@@ -126,6 +123,7 @@ public class AdminServiceImpl implements AdminService {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         List<AdminDto> pagedResult = userRepository.findAll(paging).stream()
                 .map(adminDto -> new AdminDto(
+                        adminDto.getId(),
                         adminDto.getName(),
                         adminDto.getSurname(),
                         adminDto.getUsername(),

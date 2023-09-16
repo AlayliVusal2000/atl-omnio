@@ -84,7 +84,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<MessageDto> getSenderAllMessagesById(Long userId) {
         objects[0] = userId;
-        UserEntity userEntity = userRepository.findById(userId).orElseThrow(
+        userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(
                         messageSource.getMessage(
                                 USER_NOT_FOUND.getMessage(), objects, locale)));
@@ -100,7 +100,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<MessageDto> getRecipientAllMessagesById(Long userId) {
         objects[0] = userId;
-        UserEntity userEntity = userRepository.findById(userId).orElseThrow(
+        userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(
                         messageSource.getMessage(
                                 USER_NOT_FOUND.getMessage(), objects, locale)));

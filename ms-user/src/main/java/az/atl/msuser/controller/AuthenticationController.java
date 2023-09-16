@@ -1,9 +1,6 @@
 package az.atl.msuser.controller;
 
-import az.atl.msuser.model.AuthenticationRequest;
-import az.atl.msuser.model.AuthenticationResponse;
-import az.atl.msuser.model.RegisterRequest;
-import az.atl.msuser.model.RegisterResponse;
+import az.atl.msuser.model.*;
 import az.atl.msuser.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +21,11 @@ public class AuthenticationController {
     public ResponseEntity<RegisterResponse> register(
             @Valid @RequestBody RegisterRequest registerRequest) {
         return ResponseEntity.ok(authenticationService.register(registerRequest));
+    }
+    @PostMapping("/userRegister")
+    public ResponseEntity<RegisterResponse> userRegister(
+            @Valid @RequestBody UserRegisterRequest userRegisterRequest) {
+        return ResponseEntity.ok(authenticationService.useRegister(userRegisterRequest));
     }
 
     @PostMapping("/authenticate")

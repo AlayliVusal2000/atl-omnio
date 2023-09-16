@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserEntity userEntity = userRepository.findByUsername(auth.getName()).get();
         INSTANCE.buildEntityToDto(userEntity);
-
         userEntity.setName(userDto.getName());
         userEntity.setSurname(userDto.getSurname());
         userEntity.setUsername(userDto.getUsername());

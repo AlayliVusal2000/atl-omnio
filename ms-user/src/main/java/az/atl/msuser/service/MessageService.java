@@ -3,9 +3,10 @@ package az.atl.msuser.service;
 import az.atl.msuser.dao.entity.UserEntity;
 import az.atl.msuser.model.MessageRequest;
 import az.atl.msuser.model.dto.MessageDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface MessageService {
     void sendMessage(MessageRequest request, UserEntity sender);
 

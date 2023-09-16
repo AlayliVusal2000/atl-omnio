@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDto {
 
-
+    public Long id;
     @NotBlank(message = "The name part must be filled!")
     String name;
     @NotBlank(message = "The surname part must be filled!")
