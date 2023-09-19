@@ -2,7 +2,6 @@ package az.atl.msuser.config;
 
 import az.atl.msuser.dao.repo.UserRepository;
 import az.atl.msuser.exception.UserNotFoundException;
-import az.atl.msuser.model.AuthenticationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

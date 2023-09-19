@@ -1,14 +1,10 @@
 package az.atl.msuser.controller;
 
-import az.atl.msuser.dao.entity.UserEntity;
-import az.atl.msuser.dao.repo.UserRepository;
 import az.atl.msuser.model.MessageRequest;
 import az.atl.msuser.model.dto.MessageDto;
-import az.atl.msuser.service.MessageService;
+import az.atl.msuser.service.impl.MessageServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,38 +13,32 @@ import java.util.List;
 @RequestMapping("/message")
 @RequiredArgsConstructor
 public class MessageController {
-    private final MessageService messageService;
-    private final UserRepository userRepository;
+    private final MessageServiceImpl messageService;
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(
-            @RequestBody MessageRequest request,
-            @AuthenticationPrincipal UserDetails userDetails) {
-        UserEntity sender = userRepository
-                .findByUsername(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("Sender not found"));
-        messageService.sendMessage(request, sender);
-        return ResponseEntity.ok("Message sent successfully");
+    public void sendMessage(@RequestBody MessageRequest request,
+                            @AuthenticationPrincipal String userDetails) {
+        messageService.sendMessage(request, userDetails);
     }
 
     @GetMapping("/getMySentMessages")
-    public List<MessageDto> getRecipientMessages() {
-        return messageService.getSentAllMyMessages();
+    public List<MessageDto> getMessagesSenToMe() {
+        return messageService.getMessagesSenToMe();
     }
 
     @GetMapping("/getMyBuyMessages")
-    public List<MessageDto> getSenderMessages() {
-        return messageService.getBuyAllMyMessages();
+    public List<MessageDto> getMessagesSentByMe() {
+        return messageService.getMessagesSentByMe();
     }
 
     @GetMapping("/getSenderMessagesById/{id}")
-    public List<MessageDto> getSenderMessages(@PathVariable Long id) {
-        return messageService.getSenderAllMessagesById(id);
+    public List<MessageDto> getMessagesSentById(@PathVariable Long id) {
+        return messageService.getMessagesSentById(id);
     }
 
     @GetMapping("/getRecipientMessagesById/{id}")
-    public List<MessageDto> getRecipientMessages(@PathVariable Long id) {
-        return messageService.getRecipientAllMessagesById(id);
+    public List<MessageDto> getMessagesReceivedById(@PathVariable Long id) {
+        return messageService.getMessagesReceivedById(id);
     }
 
 

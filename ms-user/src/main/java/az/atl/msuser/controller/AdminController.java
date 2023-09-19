@@ -18,7 +18,6 @@ import java.util.List;
 public class AdminController {
     private final AdminService adminService;
 
-
     @GetMapping("/getById/{id}")
     public ResponseEntity<AdminDto> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(adminService.getUserById(id));

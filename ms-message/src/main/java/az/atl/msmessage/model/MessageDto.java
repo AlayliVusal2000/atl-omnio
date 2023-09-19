@@ -1,13 +1,9 @@
 package az.atl.msmessage.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +13,10 @@ import java.math.BigDecimal;
 
 public class MessageDto {
 
-
-    Long id;
+    Long recipientId;
     String message;
+    Long senderId;
+    LocalDateTime sentTime;
+
+
 }
