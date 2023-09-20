@@ -5,12 +5,8 @@ import az.atl.msuser.model.MessageRequest;
 import az.atl.msuser.model.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,7 +17,7 @@ public class MessageServiceImpl {
     private final MessageClient messageClient;
 
 
-//        public void sendMessage(MessageRequest messageSendRequest) {
+    //        public void sendMessage(MessageRequest messageSendRequest) {
 //            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //            String token = authentication.getCredentials().toString();
 //
@@ -30,28 +26,28 @@ public class MessageServiceImpl {
 //
 //            messageClient.sendMessage(messageSendRequest, authorizationHeader);
 //        }
-    public void sendMessage(MessageRequest request,String authorizationHeader) {
+    public void sendMessage(MessageRequest request, String authorizationHeader) {
         messageClient.sendMessage(request, authorizationHeader);
     }
 
-    public List<MessageDto> getMessagesSenToMe() {
-        return messageClient.getMessagesSentToMe();
+    public List<MessageDto> getMessagesSenToMe(String authorizationHeader) {
+        return messageClient.getMessagesSentToMe(authorizationHeader);
     }
 
-    public List<MessageDto> getMessagesSentByMe() {
-        List<MessageDto> sentMessages = messageClient.getMessagesSentByMe();
-        if (sentMessages != null && !sentMessages.isEmpty()) {
-            return sentMessages;
-        } else {
-            return Collections.emptyList();
-        }
-    }
-    public List<MessageDto> getMessagesSentById(Long id) {
-        return messageClient.getMessagesSentById(id);
+    public List<MessageDto> getMessagesSentByMe(String authorizationHeader) {
+        return messageClient.getMessagesSentByMe(authorizationHeader);
     }
 
-    public List<MessageDto> getMessagesReceivedById(Long id) {
-        return messageClient.getMessagesReceivedById(id);
+    public List<MessageDto> getMessagesSentById(Long id, String authorizationHeader) {
+        return messageClient.getMessagesSentById(id, authorizationHeader);
     }
+
+    public List<MessageDto> getMessagesReceivedById(Long id, String authorizationHeader) {
+        return messageClient.getMessagesReceivedById(id, authorizationHeader);
+    }
+
+    public List<MessageDto> getUserAllMessages(Long id, String authorizationHeader){
+        return messageClient.getUserAllMessages(id,authorizationHeader);
+    };
 
 }

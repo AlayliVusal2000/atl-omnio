@@ -80,7 +80,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .builder()
                 .token(jwtToken)
                 .build();
-    }
+    };
 
 
 }

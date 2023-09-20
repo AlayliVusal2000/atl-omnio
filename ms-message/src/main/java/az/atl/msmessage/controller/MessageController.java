@@ -47,6 +47,16 @@ public class MessageController {
     public List<MessageDto> getRecipientMessages(@PathVariable Long id) {
         return messageService.getRecipientAllMessagesById(id);
     }
+    @GetMapping("/getUserAllMessagesById/{id}")
+    public List<MessageDto>getUserAllMessages(@PathVariable Long id){
+        return messageService.getUserAllMessages(id);
+    }
+
+    @DeleteMapping("/deleteMessage/{username}")
+    public void deleteMessage(@PathVariable String username,
+                              @RequestParam String message){
+        messageService.deleteMessage(username,message);;
+    }
 }
 
 

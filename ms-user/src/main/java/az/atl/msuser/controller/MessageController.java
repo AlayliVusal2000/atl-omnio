@@ -4,8 +4,6 @@ import az.atl.msuser.model.MessageRequest;
 import az.atl.msuser.model.dto.MessageDto;
 import az.atl.msuser.service.impl.MessageServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,28 +17,36 @@ public class MessageController {
     @PostMapping("/send")
     public void sendMessage(@RequestBody MessageRequest request,
                             @RequestHeader("Authorization") String authorizationHeader) {
-        messageService.sendMessage(request,authorizationHeader);
+        messageService.sendMessage(request, authorizationHeader);
     }
 
     @GetMapping("/getMySentMessages")
-    public List<MessageDto> getMessagesSenToMe() {
-        return messageService.getMessagesSenToMe();
+    public List<MessageDto> getMessagesSenToMe(@RequestHeader("Authorization") String authorizationHeader) {
+        return messageService.getMessagesSenToMe(authorizationHeader);
     }
 
     @GetMapping("/getMyBuyMessages")
-    public List<MessageDto> getMessagesSentByMe() {
-        return messageService.getMessagesSentByMe();
+    public List<MessageDto> getMessagesSentByMe(@RequestHeader("Authorization") String authorizationHeader) {
+        return messageService.getMessagesSentByMe(authorizationHeader);
     }
 
     @GetMapping("/getSenderMessagesById/{id}")
-    public List<MessageDto> getMessagesSentById(@PathVariable Long id) {
-        return messageService.getMessagesSentById(id);
+    public List<MessageDto> getMessagesSentById(@PathVariable Long id,
+                                                @RequestHeader("Authorization") String authorizationHeader) {
+        return messageService.getMessagesSentById(id, authorizationHeader);
     }
 
     @GetMapping("/getRecipientMessagesById/{id}")
-    public List<MessageDto> getMessagesReceivedById(@PathVariable Long id) {
-        return messageService.getMessagesReceivedById(id);
+    public List<MessageDto> getMessagesReceivedById(@PathVariable Long id,
+                                                    @RequestHeader("Authorization") String authorizationHeader) {
+        return messageService.getMessagesReceivedById(id, authorizationHeader);
     }
+
+    @GetMapping("/getUserAllMessage/{id}")
+    public List<MessageDto> getAllMessageById(@PathVariable Long id,
+                                              @RequestHeader("Authorization") String authorizationHeader) {
+        return messageService.getUserAllMessages(id, authorizationHeader);
+    };
 
 
 }

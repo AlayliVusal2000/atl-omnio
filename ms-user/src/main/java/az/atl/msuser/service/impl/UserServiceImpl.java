@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(updateDto.getNewPassword());
         userEntity.setPassword(encodedPassword);
         userRepository.save(userEntity);
-        log.info("Your password has been updated.");
+        log.info("Your password has been updated.");;
     }
 
 

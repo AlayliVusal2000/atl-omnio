@@ -16,14 +16,19 @@ public interface MessageClient {
                                        @RequestHeader("Authorization") String authorizationHeader);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getMySentMessages")
-    List<MessageDto> getMessagesSentToMe();
+    List<MessageDto> getMessagesSentToMe(@RequestHeader("Authorization") String authorizationHeader);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getMyBuyMessages")
-    List<MessageDto> getMessagesSentByMe();
+    List<MessageDto> getMessagesSentByMe(@RequestHeader("Authorization") String authorizationHeader);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getSenderMessagesById/{id}")
-    List<MessageDto> getMessagesSentById(@PathVariable Long id);
+    List<MessageDto> getMessagesSentById(@PathVariable Long id,
+                                         @RequestHeader("Authorization") String authorizationHeader);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getRecipientMessagesById/{id}")
-    List<MessageDto> getMessagesReceivedById(@PathVariable Long id);
+    List<MessageDto> getMessagesReceivedById(@PathVariable Long id,
+                                             @RequestHeader("Authorization") String authorizationHeader);
+    @GetMapping("/getUserAllMessagesById/{id}")
+    public List<MessageDto>getUserAllMessages(@PathVariable Long id,
+                                              @RequestHeader("Authorization") String authorizationHeader);;
 }
