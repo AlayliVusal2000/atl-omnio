@@ -18,8 +18,8 @@ public class MessageController {
 
     @PostMapping("/send")
     public void sendMessage(@RequestBody MessageRequest request,
-                            @AuthenticationPrincipal UserDetails userDetails) {
-        messageService.sendMessage(request,userDetails);
+                            @RequestHeader("Authorization") String authorizationHeader) {
+        messageService.sendMessage(request,authorizationHeader);
     }
 
     @GetMapping("/getMySentMessages")

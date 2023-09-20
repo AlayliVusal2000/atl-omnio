@@ -27,8 +27,7 @@ public class MessageController {
                 .findByUsername(userDetails.getUsername()).get();
         messageService.sendMessage(request, sender);
 
-    }
-
+}
     @GetMapping("/getMySentMessages")
     public List<MessageDto> getRecipientMessages() {
         return messageService.getSentAllMyMessages();

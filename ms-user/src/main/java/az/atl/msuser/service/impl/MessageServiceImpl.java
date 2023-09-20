@@ -30,8 +30,8 @@ public class MessageServiceImpl {
 //
 //            messageClient.sendMessage(messageSendRequest, authorizationHeader);
 //        }
-    public void sendMessage(MessageRequest request, UserDetails userDetails) {
-        messageClient.sendMessage(request, userDetails.getUsername());
+    public void sendMessage(MessageRequest request,String authorizationHeader) {
+        messageClient.sendMessage(request, authorizationHeader);
     }
 
     public List<MessageDto> getMessagesSenToMe() {

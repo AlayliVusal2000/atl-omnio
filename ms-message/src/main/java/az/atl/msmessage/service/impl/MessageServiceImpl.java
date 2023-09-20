@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,19 +37,21 @@ public class MessageServiceImpl implements MessageService {
 
 
     @Override
-    public void sendMessage(MessageRequest request, UserEntity sender) {
+    public void sendMessage(MessageRequest request, UserDetails sender) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserEntity userEntity = userRepository.findByUsername(authentication.getName()).get();
         UserEntity entity = userRepository.findByUsername(request.getRecipient())
                 .orElseThrow(() -> new UserNotFoundException(
                         "The username you submitted was not found: " + request.getRecipient()));
         MessageEntity messageEntity = MessageEntity.builder()
-                .sender(sender)
+                .sender(userEntity)
                 .recipient(entity)
                 .message(request.getMessage())
                 .sentTime(LocalDateTime.now())
                 .build();
 
         messageRepository.save(messageEntity);
-        log.info("Message sent. " + request.getMessage());
+        log.info("Message sent: " + request.getMessage());
     }
 
     @Override
