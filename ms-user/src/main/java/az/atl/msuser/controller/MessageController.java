@@ -5,6 +5,7 @@ import az.atl.msuser.model.dto.MessageDto;
 import az.atl.msuser.service.impl.MessageServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class MessageController {
 
     @PostMapping("/send")
     public void sendMessage(@RequestBody MessageRequest request,
-                            @AuthenticationPrincipal String userDetails) {
-        messageService.sendMessage(request, userDetails);
+                            @AuthenticationPrincipal UserDetails userDetails) {
+        messageService.sendMessage(request,userDetails);
     }
 
     @GetMapping("/getMySentMessages")

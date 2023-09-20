@@ -3,9 +3,7 @@ package az.atl.msmessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//@SpringBootApplication(scanBasePackages = {"az.atl.msmessage","az.atl.msuser"})
 @SpringBootApplication
-//@SpringBootApplication
 
 public class MsMessageApplication {
 

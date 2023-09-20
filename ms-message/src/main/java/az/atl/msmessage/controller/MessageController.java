@@ -25,7 +25,6 @@ public class MessageController {
             @AuthenticationPrincipal UserDetails userDetails) {
         UserEntity sender = userRepository
                 .findByUsername(userDetails.getUsername()).get();
-
         messageService.sendMessage(request, sender);
 
     }
@@ -49,8 +48,6 @@ public class MessageController {
     public List<MessageDto> getRecipientMessages(@PathVariable Long id) {
         return messageService.getRecipientAllMessagesById(id);
     }
-
-
 }
 
 

@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "B4B6250655367566B56A586E3272357536B597033C733D676F39K7";
+    private static final String SECRET_KEY = "A893KMWLO67XMALSL1MAS7533QD5D0ALPQOI892M3CSZA5623DE";
     public static final String TOKEN = "token";
 
 

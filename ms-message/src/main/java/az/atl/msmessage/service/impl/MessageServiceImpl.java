@@ -69,6 +69,25 @@ public class MessageServiceImpl implements MessageService {
             return Collections.emptyList();
         }
     }
+    @Override
+    public List<MessageDto> getSentAllMyMessages() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<UserEntity> userOptional = userRepository.findByUsername(authentication.getName());
+        if (userOptional.isPresent()) {
+            UserEntity entity = userOptional.get();
+            List<MessageEntity> sentMessages = messageRepository.findBySenderId(entity.getId());
+            log.info("All messages sent by me");
+            return sentMessages.stream()
+                    .map(messageEntity -> new MessageDto(
+                            messageEntity.getSender().getId(),
+                            messageEntity.getMessage(),
+                            messageEntity.getRecipient().getId(),
+                            messageEntity.getSentTime()))
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
 
     @Override
     public List<MessageDto> getSenderAllMessagesById(Long userId) {
@@ -101,27 +120,6 @@ public class MessageServiceImpl implements MessageService {
 
     }
 
-    @Override
-    public List<MessageDto> getSentAllMyMessages() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
-        Optional<UserEntity> userOptional = userRepository.findByUsername(authentication.getName());
-        System.out.println();
-        if (userOptional.isPresent()) {
-            UserEntity entity = userOptional.get();
-            List<MessageEntity> sentMessages = messageRepository.findBySenderId(entity.getId());
-            log.info("All messages sent by me");
-            return sentMessages.stream()
-                    .map(messageEntity -> new MessageDto(
-                            messageEntity.getSender().getId(),
-                            messageEntity.getMessage(),
-                            messageEntity.getRecipient().getId(),
-                            messageEntity.getSentTime()))
-                    .collect(Collectors.toList());
-        } else {
-            return Collections.emptyList();
-        }
-    }
 }
 
 
