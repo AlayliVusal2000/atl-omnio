@@ -55,7 +55,7 @@ public class MessageController {
     @DeleteMapping("/deleteMessage/{username}")
     public void deleteMessage(@PathVariable String username,
                               @RequestParam String message){
-        messageService.deleteMessage(username,message);;
+        messageService.deleteMessage(username,message);
     }
 }
 

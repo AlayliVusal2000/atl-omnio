@@ -10,7 +10,6 @@ import az.atl.msmessage.model.MessageRequest;
 import az.atl.msmessage.service.MessageService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,9 +29,6 @@ public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
-    private final static Locale locale = LocaleContextHolder.getLocale();
-
-    private final static Object[] objects = new Object[1];
 
 
     @Override
@@ -95,7 +90,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageDto> getSenderAllMessagesById(Long userId) {
-        objects[0] = userId;
         userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User not found"));
         List<MessageEntity> sentMessages = messageRepository.findByRecipientId(userId);
@@ -110,7 +104,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageDto> getRecipientAllMessagesById(Long userId) {
-        objects[0] = userId;
         userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("User not found"));
         List<MessageEntity> sentMessages = messageRepository.findBySenderId(userId);
@@ -143,7 +136,7 @@ public class MessageServiceImpl implements MessageService {
         userRepository.findByUsername(userEntity.getUsername())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
         MessageEntity message = messageRepository.findByMessage(messages);
-        messageRepository.delete(message);;
+        messageRepository.delete(message);
     }
 }
 

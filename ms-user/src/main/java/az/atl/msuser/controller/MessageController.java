@@ -46,9 +46,7 @@ public class MessageController {
     public List<MessageDto> getAllMessageById(@PathVariable Long id,
                                               @RequestHeader("Authorization") String authorizationHeader) {
         return messageService.getUserAllMessages(id, authorizationHeader);
-    };
-
-
+    }
 }
 
 

@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
     private final MessageSource messageSource;
     private final PasswordEncoder passwordEncoder;
     Locale locale = LocaleContextHolder.getLocale();
-    Object[] objects = new Object[1];;
+    Object[] objects = new Object[1];
 
 
     @Override

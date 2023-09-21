@@ -1,9 +1,7 @@
 package az.atl.msmessage.service;
 
-import az.atl.msmessage.dao.entity.MessageEntity;
 import az.atl.msmessage.model.MessageDto;
 import az.atl.msmessage.model.MessageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,8 @@ public interface MessageService {
     List<MessageDto> getRecipientAllMessagesById(Long userId);
 
     List<MessageDto> getUserAllMessages(Long id);
-    void deleteMessage(String username, String messages);;
+
+    void deleteMessage(String username, String messages);
 
 
 }

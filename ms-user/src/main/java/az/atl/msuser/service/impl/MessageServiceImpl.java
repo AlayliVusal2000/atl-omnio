@@ -16,16 +16,6 @@ public class MessageServiceImpl {
 
     private final MessageClient messageClient;
 
-
-    //        public void sendMessage(MessageRequest messageSendRequest) {
-//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            String token = authentication.getCredentials().toString();
-//
-//            // Add the "Bearer" prefix
-//            String authorizationHeader = "Bearer " + token;
-//
-//            messageClient.sendMessage(messageSendRequest, authorizationHeader);
-//        }
     public void sendMessage(MessageRequest request, String authorizationHeader) {
         messageClient.sendMessage(request, authorizationHeader);
     }
@@ -48,6 +38,6 @@ public class MessageServiceImpl {
 
     public List<MessageDto> getUserAllMessages(Long id, String authorizationHeader){
         return messageClient.getUserAllMessages(id,authorizationHeader);
-    };
+    }
 
 }

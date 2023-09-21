@@ -29,6 +29,6 @@ public interface MessageClient {
     List<MessageDto> getMessagesReceivedById(@PathVariable Long id,
                                              @RequestHeader("Authorization") String authorizationHeader);
     @GetMapping("/getUserAllMessagesById/{id}")
-    public List<MessageDto>getUserAllMessages(@PathVariable Long id,
-                                              @RequestHeader("Authorization") String authorizationHeader);;
+    List<MessageDto>getUserAllMessages(@PathVariable Long id,
+                                              @RequestHeader("Authorization") String authorizationHeader);
 }
